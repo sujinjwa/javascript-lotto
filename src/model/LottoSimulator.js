@@ -6,6 +6,9 @@ class LottoSimulator {
   #boughtLottos = [];
   #winningLotto = [];
   #countOfSameNumbers = 0;
+  #ranking = [0, 0, 0, 0, 0, 0];
+  #bonusNumber;
+  #hasBonus;
 
   constructor() {}
 
@@ -35,18 +38,35 @@ class LottoSimulator {
     }
   }
 
+  setBonusNumber(number) {
+    this.#bonusNumber = number;
+  }
+
   setCountOfSameNumbers() {
     let maxCount = 0;
     this.#boughtLottos.map((lotto) => {
       let nums = lotto.filter((number) => this.#winningLotto.includes(number));
+      if (nums.length === 5 && lotto.includes(this.#bonusNumber))
+        this.#hasBonus += 1;
       if (maxCount < nums.length) maxCount = nums.length;
     });
 
     this.#countOfSameNumbers = maxCount;
   }
 
-  getCountOfSameNumbers() {
-    return this.#countOfSameNumbers;
+  setRanking() {
+    let rank = 0;
+    if (this.#countOfSameNumbers === 6) rank = 1;
+    if (this.#countOfSameNumbers === 5 && this.#hasBonus) rank = 2;
+    if (this.#countOfSameNumbers === 5 && !this.#hasBonus) rank = 3;
+    if (this.#countOfSameNumbers === 4) rank = 4;
+    if (this.#countOfSameNumbers === 3) rank = 5;
+
+    this.#ranking[rank] = 1;
+  }
+
+  getRanking() {
+    return this.#ranking;
   }
 }
 

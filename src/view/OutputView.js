@@ -4,7 +4,10 @@ const {
   COUNT_OF_BOUGHT_LOTTOS,
   LOTTO,
   MESSAGE,
+  INFO,
+  COUNT,
 } = require('../utils/constants');
+const LottoSimulator = require('../model/LottoSimulator');
 
 const OutputView = {
   printMessage(message) {
@@ -23,7 +26,13 @@ const OutputView = {
   },
 
   printResult(lottoSimulator) {
+    const ranking = lottoSimulator.getRanking();
     print(MESSAGE.result);
+    print(INFO.fifthPrize + COUNT(ranking[5]));
+    print(INFO.fourthPrize + COUNT(ranking[4]));
+    print(INFO.thirdPrize + COUNT(ranking[3]));
+    print(INFO.secondPrize + COUNT(ranking[2]));
+    print(INFO.firstPrize + COUNT(ranking[1]));
   },
 };
 

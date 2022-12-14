@@ -5,10 +5,20 @@ const MESSAGE = Object.freeze({
   result: '\n당첨 통계\n---\n',
 });
 
+const INFO = Object.freeze({
+  firstPrize: '6개 일치 (2,000,000,000원) - ',
+  secondPrize: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  thirdPrize: '5개 일치 (1,500,000원) - ',
+  fourthPrize: '4개 일치 (50,000원) - ',
+  fifthPrize: '3개 일치 (5,000원) - ',
+});
+
 const COUNT_OF_BOUGHT_LOTTOS = (count) => `${count}개를 구매했습니다.`;
 
 const LOTTO = (lotto) =>
   `[${lotto[0]}, ${lotto[1]}, ${lotto[2]}, ${lotto[3]}, ${lotto[4]}, ${lotto[5]}]`;
+
+const COUNT = (count) => `${count}개`;
 
 const LINE_BREAK = Object.freeze('');
 
@@ -27,8 +37,10 @@ const ZERO = 0;
 
 module.exports = {
   MESSAGE,
+  INFO,
   LOTTO,
   COUNT_OF_BOUGHT_LOTTOS,
+  COUNT,
   LINE_BREAK,
   LOTTO_LENGTH,
   LOTTO_NUMBER,
