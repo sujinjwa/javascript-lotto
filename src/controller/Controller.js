@@ -65,6 +65,14 @@ class Controller {
     Validation.validateBonusType(number);
     Validation.validateBonusRange(number);
     this.lottoSimulator.validateDuplication(number);
+
+    this.printResult();
+  }
+
+  printResult() {
+    this.lottoSimulator.setCountOfSameNumbers();
+    OutputView.printMessage(this.lottoSimulator.getCountOfSameNumbers());
+    OutputView.printResult(this.lottoSimulator);
   }
 }
 

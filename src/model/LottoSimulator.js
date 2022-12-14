@@ -5,6 +5,7 @@ const { LOTTO_NUMBER, LOTTO_LENGTH } = require('../utils/constants');
 class LottoSimulator {
   #boughtLottos = [];
   #winningLotto = [];
+  #countOfSameNumbers = 0;
 
   constructor() {}
 
@@ -32,6 +33,20 @@ class LottoSimulator {
     if (this.#winningLotto.includes(Number(bonusNumber))) {
       throw '[ERROR] 당첨 번호와 중복되는 번호가 있습니다.';
     }
+  }
+
+  setCountOfSameNumbers() {
+    let maxCount = 0;
+    this.#boughtLottos.map((lotto) => {
+      let nums = lotto.filter((number) => this.#winningLotto.includes(number));
+      if (maxCount < nums.length) maxCount = nums.length;
+    });
+
+    this.#countOfSameNumbers = maxCount;
+  }
+
+  getCountOfSameNumbers() {
+    return this.#countOfSameNumbers;
   }
 }
 

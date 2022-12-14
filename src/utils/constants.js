@@ -2,6 +2,7 @@ const MESSAGE = Object.freeze({
   inputMoney: '구입금액을 입력해 주세요.\n',
   inputWinningLotto: '당첨 번호를 입력해 주세요.\n',
   inputBonusNumber: '\n보너스 번호를 입력해 주세요.\n',
+  result: '\n당첨 통계\n---\n',
 });
 
 const COUNT_OF_BOUGHT_LOTTOS = (count) => `${count}개를 구매했습니다.`;

@@ -3,6 +3,7 @@ const {
   LINE_BREAK,
   COUNT_OF_BOUGHT_LOTTOS,
   LOTTO,
+  MESSAGE,
 } = require('../utils/constants');
 
 const OutputView = {
@@ -19,6 +20,10 @@ const OutputView = {
     });
 
     print(LINE_BREAK);
+  },
+
+  printResult(lottoSimulator) {
+    print(MESSAGE.result);
   },
 };
 
