@@ -4,6 +4,7 @@ class App {
   constructor() {
     this.controller = new Controller();
   }
+
   play() {
     this.controller.inputMoney();
   }

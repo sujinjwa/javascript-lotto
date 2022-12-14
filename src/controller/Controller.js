@@ -2,6 +2,7 @@ const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
 const Validation = require('../utils/Validation');
 const LottoSimulator = require('../model/LottoSimulator');
+const { LOTTO_UNIT } = require('../utils/constants');
 
 class Controller {
   constructor() {
@@ -18,11 +19,17 @@ class Controller {
     Validation.validateUnit(money);
     Validation.validateAmount(money);
 
-    this.buyLottos(money / 1000);
+    this.buyLottos(money / LOTTO_UNIT);
   }
 
   buyLottos(count) {
     this.lottoSimulator.makeLottos(count);
+
+    this.printBoughtLottos(count);
+  }
+
+  printBoughtLottos(count) {
+    OutputView.printLottos(this.lottoSimulator, count);
   }
 }
 
