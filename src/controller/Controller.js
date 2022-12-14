@@ -15,7 +15,7 @@ class Controller {
 
   validateInputtedMoney(money) {
     Validation.validateLength(money);
-    Validation.validateNumber(money);
+    Validation.validateMoneyType(money);
     Validation.validateUnit(money);
     Validation.validateAmount(money);
 
@@ -30,6 +30,22 @@ class Controller {
 
   printBoughtLottos(count) {
     OutputView.printLottos(this.lottoSimulator, count);
+
+    this.inputWinningLotto();
+  }
+
+  inputWinningLotto() {
+    InputView.readWinningLotto(this.validateWinningLotto.bind(this));
+  }
+
+  validateWinningLotto(lotto) {
+    Validation.validateLength(lotto);
+
+    lotto = lotto.split(',').map((number) => Number(number));
+    Validation.validateLottoType(lotto);
+    Validation.validateSixLength(lotto);
+    Validation.validateRange(lotto);
+    Validation.validateDuplication(lotto);
   }
 }
 

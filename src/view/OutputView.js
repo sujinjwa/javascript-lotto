@@ -13,9 +13,12 @@ const OutputView = {
   printLottos(lottoSimulator, count) {
     print(LINE_BREAK);
     print(COUNT_OF_BOUGHT_LOTTOS(count));
+
     lottoSimulator.getBoughtLottos().map((lotto) => {
       print(LOTTO(lotto));
     });
+
+    print(LINE_BREAK);
   },
 };
 

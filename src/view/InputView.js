@@ -5,6 +5,10 @@ const InputView = {
   readInputtedMoney(callback) {
     input(MESSAGE.inputMoney, callback);
   },
+
+  readWinningLotto(callback) {
+    input(MESSAGE.inputWinningLotto, callback);
+  },
 };
 
 module.exports = InputView;
