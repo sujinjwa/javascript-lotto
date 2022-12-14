@@ -20,6 +20,8 @@ const LOTTO = (lotto) =>
 
 const COUNT = (count) => `${count}개`;
 
+const RATE_OF_RETURN = (rateOfReturn) => `총 수익률은 ${rateOfReturn}%입니다.`;
+
 const LINE_BREAK = Object.freeze('');
 
 const LOTTO_LENGTH = {
@@ -32,6 +34,8 @@ const LOTTO_NUMBER = {
   max: 45,
 };
 
+const RETURN = [0, 2000000000, 30000000, 1500000, 50000, 5000];
+
 const LOTTO_UNIT = 1000;
 const ZERO = 0;
 
@@ -41,9 +45,11 @@ module.exports = {
   LOTTO,
   COUNT_OF_BOUGHT_LOTTOS,
   COUNT,
+  RATE_OF_RETURN,
   LINE_BREAK,
   LOTTO_LENGTH,
   LOTTO_NUMBER,
+  RETURN,
   LOTTO_UNIT,
   ZERO,
 };

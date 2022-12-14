@@ -6,6 +6,7 @@ const {
   MESSAGE,
   INFO,
   COUNT,
+  RATE_OF_RETURN,
 } = require('../utils/constants');
 const LottoSimulator = require('../model/LottoSimulator');
 
@@ -33,6 +34,7 @@ const OutputView = {
     print(INFO.thirdPrize + COUNT(ranking[3]));
     print(INFO.secondPrize + COUNT(ranking[2]));
     print(INFO.firstPrize + COUNT(ranking[1]));
+    print(RATE_OF_RETURN(lottoSimulator.getRateOfReturn()));
   },
 };
 

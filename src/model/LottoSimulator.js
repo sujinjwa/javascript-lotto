@@ -1,6 +1,6 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Lotto = require('./Lotto');
-const { LOTTO_NUMBER, LOTTO_LENGTH } = require('../utils/constants');
+const { LOTTO_NUMBER, LOTTO_LENGTH, RETURN } = require('../utils/constants');
 
 class LottoSimulator {
   #boughtLottos = [];
@@ -9,6 +9,7 @@ class LottoSimulator {
   #ranking = [0, 0, 0, 0, 0, 0];
   #bonusNumber;
   #hasBonus;
+  #rateOfReturn;
 
   constructor() {}
 
@@ -67,6 +68,18 @@ class LottoSimulator {
 
   getRanking() {
     return this.#ranking;
+  }
+
+  setRateOfReturn() {
+    this.#ranking.map((num, index) => {
+      if (num === 1) {
+        this.#rateOfReturn = RETURN[index] / this.#boughtLottos.length / 10;
+      }
+    });
+  }
+
+  getRateOfReturn() {
+    return this.#rateOfReturn.toFixed(1);
   }
 }
 

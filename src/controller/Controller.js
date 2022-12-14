@@ -78,6 +78,7 @@ class Controller {
   printResult() {
     this.lottoSimulator.setCountOfSameNumbers();
     this.lottoSimulator.setRanking();
+    this.lottoSimulator.setRateOfReturn();
     OutputView.printResult(this.lottoSimulator);
   }
 }
