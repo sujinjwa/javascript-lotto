@@ -44,8 +44,27 @@ class Controller {
     lotto = lotto.split(',').map((number) => Number(number));
     Validation.validateLottoType(lotto);
     Validation.validateSixLength(lotto);
-    Validation.validateRange(lotto);
+    Validation.validateLottoRange(lotto);
     Validation.validateDuplication(lotto);
+
+    this.setWinningLotto(lotto);
+  }
+
+  setWinningLotto(lotto) {
+    this.lottoSimulator.setWinningLotto(lotto);
+
+    this.inputBonusNumber();
+  }
+
+  inputBonusNumber() {
+    InputView.readBonusNumber(this.validateBonusNumber.bind(this));
+  }
+
+  validateBonusNumber(number) {
+    Validation.validateLength(number);
+    Validation.validateBonusType(number);
+    Validation.validateBonusRange(number);
+    this.lottoSimulator.validateDuplication(number);
   }
 }
 

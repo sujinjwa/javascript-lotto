@@ -20,8 +20,18 @@ class LottoSimulator {
     }
   }
 
+  setWinningLotto(lotto) {
+    this.#winningLotto = lotto;
+  }
+
   getBoughtLottos() {
     return this.#boughtLottos;
+  }
+
+  validateDuplication(bonusNumber) {
+    if (this.#winningLotto.includes(Number(bonusNumber))) {
+      throw '[ERROR] 당첨 번호와 중복되는 번호가 있습니다.';
+    }
   }
 }
 

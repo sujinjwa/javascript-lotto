@@ -9,6 +9,10 @@ const InputView = {
   readWinningLotto(callback) {
     input(MESSAGE.inputWinningLotto, callback);
   },
+
+  readBonusNumber(callback) {
+    input(MESSAGE.inputBonusNumber, callback);
+  },
 };
 
 module.exports = InputView;

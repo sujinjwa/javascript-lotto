@@ -12,7 +12,7 @@ const Validation = {
   },
 
   validateMoneyType(money) {
-    if (Number(money) === NaN) throw '[ERROR] 숫자를 입력해주세요.';
+    if (Number.isNaN(Number(money))) throw '[ERROR] 숫자를 입력해주세요.';
   },
 
   validateUnit(money) {
@@ -33,7 +33,7 @@ const Validation = {
       throw '[ERROR] 6개의 숫자를 입력해주세요.';
   },
 
-  validateRange(lotto) {
+  validateLottoRange(lotto) {
     lotto.map((number) => {
       if (number < LOTTO_NUMBER.min || number > LOTTO_NUMBER.max) {
         throw '[ERROR] 로또의 번호 범위는 1 ~ 45 이내입니다.';
@@ -44,6 +44,16 @@ const Validation = {
   validateDuplication(lotto) {
     if (lotto.length !== new Set(lotto).size) {
       throw '[ERROR] 중복되는 번호가 있습니다.';
+    }
+  },
+
+  validateBonusType(number) {
+    if (Number.isNaN(Number(number))) throw '[ERROR] 숫자를 입력해주세요.';
+  },
+
+  validateBonusRange(number) {
+    if (number < LOTTO_NUMBER.min || number > LOTTO_NUMBER.max) {
+      throw '[ERROR] 로또의 번호 범위는 1 ~ 45 이내입니다.';
     }
   },
 };
