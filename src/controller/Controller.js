@@ -1,5 +1,6 @@
 const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
+const Validation = require('../utils/Validation');
 
 class Controller {
   constructor() {}
@@ -9,8 +10,10 @@ class Controller {
   }
 
   validateInputtedMoney(money) {
-    try {
-    } catch (error) {}
+    Validation.validateLength(money);
+    Validation.validateNumber(money);
+    Validation.validateUnit(money);
+    Validation.validateAmount(money);
   }
 }
 
