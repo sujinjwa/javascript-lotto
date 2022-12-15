@@ -1,4 +1,3 @@
-const { LOTTO_LENGTH } = require('../utils/constants');
 const Validation = require('../utils/Validation');
 
 class Lotto {
