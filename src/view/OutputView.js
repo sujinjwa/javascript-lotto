@@ -6,9 +6,9 @@ const {
   MESSAGE,
   INFO,
   COUNT,
+  RANK,
   RATE_OF_RETURN,
 } = require('../utils/constants');
-const LottoSimulator = require('../model/LottoSimulator');
 
 const OutputView = {
   printMessage(message) {
@@ -29,11 +29,11 @@ const OutputView = {
   printResult(lottoSimulator) {
     const ranking = lottoSimulator.getRanking();
     print(MESSAGE.result);
-    print(INFO.fifthPrize + COUNT(ranking[5]));
-    print(INFO.fourthPrize + COUNT(ranking[4]));
-    print(INFO.thirdPrize + COUNT(ranking[3]));
-    print(INFO.secondPrize + COUNT(ranking[2]));
-    print(INFO.firstPrize + COUNT(ranking[1]));
+    print(INFO.fifthPrize + COUNT(ranking[RANK.fifth]));
+    print(INFO.fourthPrize + COUNT(ranking[RANK.fourth]));
+    print(INFO.thirdPrize + COUNT(ranking[RANK.third]));
+    print(INFO.secondPrize + COUNT(ranking[RANK.second]));
+    print(INFO.firstPrize + COUNT(ranking[RANK.first]));
     print(RATE_OF_RETURN(lottoSimulator.getRateOfReturn()));
   },
 };

@@ -1,58 +1,56 @@
-const { set } = require('express/lib/response');
 const {
   LOTTO_LENGTH,
   ZERO,
   LOTTO_UNIT,
   LOTTO_NUMBER,
+  ERROR,
 } = require('../utils/constants');
 
 const Validation = {
   validateLength(input) {
-    if (input.length === ZERO) throw '[ERROR] 공백입니다. 값을 입력해주세요.';
+    if (input.length === ZERO) throw ERROR.isBlank;
   },
 
   validateMoneyType(money) {
-    if (Number.isNaN(Number(money))) throw '[ERROR] 숫자를 입력해주세요.';
+    if (Number.isNaN(Number(money))) throw ERROR.isNotNumber;
   },
 
   validateUnit(money) {
-    if (money % LOTTO_UNIT !== ZERO)
-      throw '[ERROR] 구매 금액은 1,000원 단위로 입력해주세요.';
+    if (money % LOTTO_UNIT !== ZERO) throw ERROR.isNotValidUnit;
   },
 
   validateAmount(money) {
-    if (money < LOTTO_UNIT) throw '[ERROR] 최소 구매 금액은 1,000원입니다.';
+    if (money < LOTTO_UNIT) throw ERROR.isNotEnoughMoney;
   },
 
   validateLottoType(lotto) {
-    if (lotto.includes(NaN)) throw '[ERROR] 숫자를 입력해주세요.';
+    if (lotto.includes(NaN)) throw ERROR.isNotNumber;
   },
 
   validateSixLength(lotto) {
-    if (lotto.length !== LOTTO_LENGTH.max)
-      throw '[ERROR] 6개의 숫자를 입력해주세요.';
+    if (lotto.length !== LOTTO_LENGTH.max) throw ERROR.isNotSixLength;
   },
 
   validateLottoRange(lotto) {
     lotto.map((number) => {
       if (number < LOTTO_NUMBER.min || number > LOTTO_NUMBER.max) {
-        throw '[ERROR] 로또의 번호 범위는 1 ~ 45 이내입니다.';
+        throw ERROR.isNotValidRange;
       }
     });
   },
 
   validateDuplication(lotto) {
     if (new Set(lotto).size !== LOTTO_LENGTH.max)
-      throw '[ERROR] 중복되는 번호가 있습니다.';
+      throw ERROR.hasDuplicatedNumber;
   },
 
   validateBonusType(number) {
-    if (Number.isNaN(Number(number))) throw '[ERROR] 숫자를 입력해주세요.';
+    if (Number.isNaN(Number(number))) throw ERROR.isNotNumber;
   },
 
   validateBonusRange(number) {
     if (number < LOTTO_NUMBER.min || number > LOTTO_NUMBER.max) {
-      throw '[ERROR] 로또의 번호 범위는 1 ~ 45 이내입니다.';
+      throw ERROR.isNotValidRange;
     }
   },
 };
