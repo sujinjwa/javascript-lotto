@@ -41,7 +41,7 @@ class LottoSimulator {
 
   makeLottos(count) {
     for (let i = 0; i < count; i++) {
-      const numbers = Random.pickUniqueNumbersInRange(
+      let numbers = Random.pickUniqueNumbersInRange(
         LOTTO_NUMBER.min,
         LOTTO_NUMBER.max,
         LOTTO_LENGTH.max
@@ -75,7 +75,7 @@ class LottoSimulator {
 
   setCountOfSameNumbers() {
     this.#boughtLottos.map((lotto, index) => {
-      const nums = lotto.filter((num) => this.#winningLotto.includes(num));
+      let nums = lotto.filter((num) => this.#winningLotto.includes(num));
       this.#countOfSameNumbers.push(nums.length);
 
       if (this.hasBonusNumber(lotto)) this.#hasBonus[index] = ONE;
