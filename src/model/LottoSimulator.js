@@ -93,7 +93,10 @@ class LottoSimulator {
   }
 
   getRateOfReturn() {
-    return this.#rateOfReturn.toFixed(1);
+    return this.#rateOfReturn
+      .toFixed(1)
+      .toLocaleString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }
 

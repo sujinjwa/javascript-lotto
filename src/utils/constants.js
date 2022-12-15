@@ -35,25 +35,25 @@ const RATE_OF_RETURN = (rateOfReturn) => `총 수익률은 ${rateOfReturn}%입�
 
 const LINE_BREAK = Object.freeze('');
 
-const LOTTO_LENGTH = {
+const LOTTO_LENGTH = Object.freeze({
   min: 1,
   max: 6,
-};
+});
 
-const LOTTO_NUMBER = {
+const LOTTO_NUMBER = Object.freeze({
   min: 1,
   max: 45,
-};
+});
 
-const RANK = {
+const RANK = Object.freeze({
   first: 1,
   second: 2,
   third: 3,
   fourth: 4,
   fifth: 5,
-};
+});
 
-const RETURN = [0, 2000000000, 30000000, 1500000, 50000, 5000];
+const RETURN = Object.freeze([0, 2000000000, 30000000, 1500000, 50000, 5000]);
 
 const LOTTO_UNIT = Object.freeze(1000);
 const ZERO = Object.freeze(0);
