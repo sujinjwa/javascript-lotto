@@ -2,6 +2,7 @@ const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
 const Validation = require('../utils/Validation');
 const LottoSimulator = require('../model/LottoSimulator');
+const Lotto = require('../model/Lotto');
 const { LOTTO_UNIT } = require('../utils/constants');
 
 class Controller {
@@ -40,14 +41,9 @@ class Controller {
 
   validateWinningLotto(lotto) {
     Validation.validateLength(lotto);
-
     lotto = lotto.split(',').map((number) => Number(number));
-    Validation.validateLottoType(lotto);
-    Validation.validateSixLength(lotto);
-    Validation.validateLottoRange(lotto);
-    Validation.validateDuplication(lotto);
 
-    this.setWinningLotto(lotto);
+    this.setWinningLotto(new Lotto(lotto).getLotto());
   }
 
   setWinningLotto(lotto) {

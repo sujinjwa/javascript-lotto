@@ -42,9 +42,8 @@ const Validation = {
   },
 
   validateDuplication(lotto) {
-    if (lotto.length !== new Set(lotto).size) {
+    if (new Set(lotto).size !== LOTTO_LENGTH.max)
       throw '[ERROR] 중복되는 번호가 있습니다.';
-    }
   },
 
   validateBonusType(number) {
