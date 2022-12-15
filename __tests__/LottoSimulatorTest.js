@@ -25,4 +25,19 @@ describe('로또 시뮬레이터 테스트', () => {
       lottoSimulator.validateBonusNumber(input);
     }).toThrow(expected);
   });
+
+  test.each([
+    [[1, 2, 3, 4, 5, 6], 2, '[ERROR] 당첨 번호와 중복되는 번호가 있습니다.'],
+    [[1, 2, 3, 4, 5, 6], 3, '[ERROR] 당첨 번호와 중복되는 번호가 있습니다.'],
+    [[1, 2, 3, 4, 5, 6], 4, '[ERROR] 당첨 번호와 중복되는 번호가 있습니다.'],
+  ])(
+    '보너스 번호가 당첨 번호와 중복되는 경우 예외 처리',
+    (winningLotto, bonusNumber, expected) => {
+      expect(() => {
+        const lottoSimulator = new LottoSimulator();
+        lottoSimulator.setWinningLotto(winningLotto);
+        lottoSimulator.validateDuplication(bonusNumber);
+      }).toThrow(expected);
+    }
+  );
 });
