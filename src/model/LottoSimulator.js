@@ -1,17 +1,28 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Lotto = require('./Lotto');
-const { LOTTO_NUMBER, LOTTO_LENGTH, RETURN } = require('../utils/constants');
+const {
+  LOTTO_NUMBER,
+  LOTTO_LENGTH,
+  LOTTO_UNIT,
+  RETURN,
+  ERROR,
+  RANK,
+  ONE,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  HUNDRED,
+} = require('../utils/constants');
 
 class LottoSimulator {
   #boughtLottos = [];
   #winningLotto = [];
-  #countOfSameNumbers = 0;
+  #countOfSameNumbers = [0];
   #ranking = [0, 0, 0, 0, 0, 0];
   #bonusNumber;
-  #hasBonus;
+  #hasBonus = [0];
   #rateOfReturn;
-
-  constructor() {}
 
   makeLottos(count) {
     for (let i = 0; i < count; i++) {
@@ -35,7 +46,7 @@ class LottoSimulator {
 
   validateDuplication(bonusNumber) {
     if (this.#winningLotto.includes(Number(bonusNumber))) {
-      throw '[ERROR] 당첨 번호와 중복되는 번호가 있습니다.';
+      throw ERROR.hasWinningNumber;
     }
   }
 
@@ -43,27 +54,29 @@ class LottoSimulator {
     this.#bonusNumber = number;
   }
 
-  setCountOfSameNumbers() {
-    let maxCount = 0;
-    this.#boughtLottos.map((lotto) => {
-      let nums = lotto.filter((number) => this.#winningLotto.includes(number));
-      if (nums.length === 5 && lotto.includes(this.#bonusNumber))
-        this.#hasBonus += 1;
-      if (maxCount < nums.length) maxCount = nums.length;
-    });
+  hasBonusNumber(lotto) {
+    return lotto.includes(this.#bonusNumber);
+  }
 
-    this.#countOfSameNumbers = maxCount;
+  setCountOfSameNumbers() {
+    this.#boughtLottos.map((lotto, index) => {
+      const nums = lotto.filter((num) => this.#winningLotto.includes(num));
+      this.#countOfSameNumbers.push(nums.length);
+
+      if (this.hasBonusNumber(lotto)) this.#hasBonus[index] = ONE;
+    });
   }
 
   setRanking() {
-    let rank = 0;
-    if (this.#countOfSameNumbers === 6) rank = 1;
-    if (this.#countOfSameNumbers === 5 && this.#hasBonus) rank = 2;
-    if (this.#countOfSameNumbers === 5 && !this.#hasBonus) rank = 3;
-    if (this.#countOfSameNumbers === 4) rank = 4;
-    if (this.#countOfSameNumbers === 3) rank = 5;
-
-    this.#ranking[rank] = 1;
+    this.#countOfSameNumbers.map((count, index) => {
+      let rank = 0;
+      if (count === SIX) rank = RANK.first;
+      if (count === FIVE && this.#hasBonus[index]) rank = RANK.second;
+      if (count === FIVE && !this.#hasBonus[index]) rank = RANK.third;
+      if (count === FOUR) rank = RANK.fourth;
+      if (count === THREE) rank = RANK.fifth;
+      this.#ranking[rank] += 1;
+    });
   }
 
   getRanking() {
@@ -71,11 +84,12 @@ class LottoSimulator {
   }
 
   setRateOfReturn() {
+    let returns = 0;
     this.#ranking.map((num, index) => {
-      if (num === 1) {
-        this.#rateOfReturn = RETURN[index] / this.#boughtLottos.length / 10;
-      }
+      if (num >= ONE) returns += RETURN[index] * num;
     });
+    this.#rateOfReturn =
+      (returns / (this.#boughtLottos.length * LOTTO_UNIT)) * HUNDRED;
   }
 
   getRateOfReturn() {
