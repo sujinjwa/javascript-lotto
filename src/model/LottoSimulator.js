@@ -1,5 +1,6 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Lotto = require('./Lotto');
+const Validation = require('../utils/Validation');
 const {
   LOTTO_NUMBER,
   LOTTO_LENGTH,
@@ -23,6 +24,20 @@ class LottoSimulator {
   #bonusNumber;
   #hasBonus = [0];
   #rateOfReturn;
+
+  validateInputtedMoney(money) {
+    Validation.validateLength(money);
+    Validation.validateMoneyType(money);
+    Validation.validateAmount(money);
+    Validation.validateUnit(money);
+  }
+
+  validateBonusNumber(number) {
+    Validation.validateLength(number);
+    Validation.validateBonusType(number);
+    Validation.validateBonusRange(number);
+    this.validateDuplication(number);
+  }
 
   makeLottos(count) {
     for (let i = 0; i < count; i++) {

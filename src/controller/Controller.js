@@ -15,10 +15,7 @@ class Controller {
   }
 
   validateInputtedMoney(money) {
-    Validation.validateLength(money);
-    Validation.validateMoneyType(money);
-    Validation.validateUnit(money);
-    Validation.validateAmount(money);
+    this.lottoSimulator.validateInputtedMoney(money);
 
     this.buyLottos(money / LOTTO_UNIT);
   }
@@ -57,10 +54,7 @@ class Controller {
   }
 
   validateBonusNumber(number) {
-    Validation.validateLength(number);
-    Validation.validateBonusType(number);
-    Validation.validateBonusRange(number);
-    this.lottoSimulator.validateDuplication(number);
+    this.lottoSimulator.validateBonusNumber(number);
 
     this.setBonusNumber(number);
   }
